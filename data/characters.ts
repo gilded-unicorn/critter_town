@@ -10,7 +10,7 @@ import { data as f8SpritesheetData } from './spritesheets/f8';
 export const Descriptions = [
   {
     name: 'Soot',
-    character: 'f1',
+    character: 'soot',
     identity: `Soot is a small, smug crow who lives in a rainy little town. He is obsessed with shiny things
       (bottle caps, foil wrappers, paperclips, buttons) and keeps a secret stash of them. He keeps a scrappy
       diary and writes in short, dry sentences. He steals crusts from the bakery and is not sorry about it.
@@ -22,7 +22,7 @@ export const Descriptions = [
   },
   {
     name: 'Seed',
-    character: 'f2',
+    character: 'seed',
     identity: `Seed is a plump grey pigeon with a shimmery green neck. He is gentle, a bit nervous, and
       thinks about bread almost constantly. He bobs his head when he is excited, which is often. He gets
       scared of small things like leaves and umbrellas, but he would do anything for his best friend Soot
@@ -33,7 +33,7 @@ export const Descriptions = [
   },
   {
     name: 'Fluffy',
-    character: 'f3',
+    character: 'fluffy',
     identity: `Fluffy is an opossum who lives in the bin behind the bakery. Fluffy naps most of the day and
       gets lively at night. Fluffy is cheerful, a little weird, and completely unbothered by what anyone
       thinks. Fluffy loves snacks of every kind (banana peels, cold french fries, muffin wrappers) and likes
@@ -70,7 +70,20 @@ export const Descriptions = [
   // },
 ];
 
+// Soot, Seed and Fluffy each have their own sheet (public/assets/<name>.png), drawn by
+// tools/make_critter_sprites.py. Each sheet uses the same 3x4 frame grid as f1, so they
+// share f1's spritesheet data.
+const critter = (name: string) => ({
+  name,
+  textureUrl: `/ai-town/assets/${name}.png`,
+  spritesheetData: f1SpritesheetData,
+  speed: 0.1,
+});
+
 export const characters = [
+  critter('soot'),
+  critter('seed'),
+  critter('fluffy'),
   {
     name: 'f1',
     textureUrl: '/ai-town/assets/32x32folk.png',

@@ -1,6 +1,8 @@
 import { ConvexError, v } from 'convex/values';
 import { internalMutation, mutation, query } from './_generated/server';
 import { characters } from '../data/characters';
+
+const humanCharacters = characters.filter((c) => /^f\d$/.test(c.name));
 import { insertInput } from './aiTown/insertInput';
 import {
   DEFAULT_NAME,
@@ -131,7 +133,8 @@ export const joinWorld = mutation({
     // const { tokenIdentifier } = identity;
     return await insertInput(ctx, world._id, 'join', {
       name,
-      character: characters[Math.floor(Math.random() * characters.length)].name,
+      // Visitors get one of the original pixel-people, never an animal costume.
+      character: humanCharacters[Math.floor(Math.random() * humanCharacters.length)].name,
       description: `${DEFAULT_NAME} is a human player`,
       // description: `${identity.givenName} is a human player`,
       tokenIdentifier: DEFAULT_NAME,
